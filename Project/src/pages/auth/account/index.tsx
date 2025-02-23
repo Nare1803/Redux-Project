@@ -1,0 +1,32 @@
+import { Navigate, useParams } from "react-router-dom";
+import { useHttpQuery } from "../../../helpers/useHttp";
+import { IAccount, IResponse } from "../../../helpers/types";
+import { AccountHeader } from "./components/account-header";
+import { AccountContext } from "./context";
+
+export const Account = () => {
+  const { id } = useParams();
+  const { data, loading, error, refetch } = useHttpQuery<IResponse>(
+    "/account/" + id
+  );
+  console.log(data);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <Navigate to="/profile" />;
+  }
+
+  const account: IAccount | null = data.payload
+    ? (data.payload as IAccount)
+    : null;
+  console.log(data);
+  return (
+    account && (
+      <AccountContext.Provider value={{ account, refetch }}>
+        <AccountHeader />/{" "}
+      </AccountContext.Provider>
+    )
+  );
+};

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas style="background-color: skyblue;">
+
+    </canvas>
+    <script type="importmap">
+        {
+            "imports":{
+                "game": "./src/game.js",
+                "bird": "./src/bird.js",
+                "utils": "./src/utils.js",
+                "gates": "./src/gates.js"
+            }
+        }
+    </script>
+    <script type="module">
+        // import 'utils'
+         import {Game} from "game"
+         const app = new Game()
+         app.start()
+    </script>
+</body>
+</html>
